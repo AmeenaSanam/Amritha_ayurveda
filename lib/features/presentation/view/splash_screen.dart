@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:amritha_ayurveda/core/constant/app_assets.dart';
 import 'package:amritha_ayurveda/core/constant/app_colors.dart';
+import 'package:amritha_ayurveda/features/presentation/view/login_screen.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -15,7 +16,9 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration(seconds: 2), () {});
+    Future.delayed(Duration(seconds: 4), () {
+      Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginScreen()));
+    });
   }
 
   @override

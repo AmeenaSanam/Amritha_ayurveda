@@ -9,7 +9,7 @@ android {
     namespace = "com.example.amritha_ayurveda"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
-
+    
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
