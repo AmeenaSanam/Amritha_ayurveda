@@ -3,7 +3,9 @@
 import 'dart:ui';
 
 import 'package:amritha_ayurveda/core/constant/app_colors.dart';
+import 'package:amritha_ayurveda/core/utils/toast_helper.dart';
 import 'package:amritha_ayurveda/features/presentation/view/home_screen.dart';
+import 'package:amritha_ayurveda/features/presentation/view_model/login_viewmodel.dart';
 import 'package:amritha_ayurveda/features/presentation/widgets/button%20_widgets.dart';
 import 'package:amritha_ayurveda/features/presentation/widgets/text_field_widgets.dart';
 import 'package:amritha_ayurveda/features/presentation/widgets/text_widgets.dart';
@@ -12,7 +14,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/constant/app_assets.dart';
-import '../view_model/login_view_model.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
@@ -23,7 +24,7 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final viewmodel = Provider.of<LoginViewModel>(context);
+    final viewmodel = Provider.of<LoginViewmodel>(context);
     final emailRegex = RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$');
 
     var size = MediaQuery.of(context).size;
@@ -114,16 +115,8 @@ class LoginScreen extends StatelessWidget {
                                       emailController.text,
                                       passwordController.text,
                                     );
-                                    if (viewmodel.loginUser != null) {
-                                      ScaffoldMessenger.of(
-                                        context,
-                                      ).showSnackBar(
-                                        SnackBar(
-                                          content: Text(
-                                            "Logged in successfully"
-                                          ),
-                                        ),
-                                      );
+                                    if (viewmodel.isSuccess ) {
+                                      ToastHelper.showToast("Logged in Successfully",isSuccess: true);
                                       Navigator.pushReplacement(
                                         context,
                                         MaterialPageRoute(
@@ -136,7 +129,7 @@ class LoginScreen extends StatelessWidget {
                                       ).showSnackBar(
                                         SnackBar(
                                           content: Text(
-                                            viewmodel.failures!.message
+                                            viewmodel.errorMessage!
                                           ),
                                         ),
                                       );
@@ -153,9 +146,10 @@ class LoginScreen extends StatelessWidget {
                                 },
                               ),
                             ),
-                      SizedBox(height: 40),
-                      // Spacer(),
+                          // Spacer(),  
+                      SizedBox(height: 70),
                       RichText(
+                        textAlign: TextAlign.start,
                         text: TextSpan(
                           style: GoogleFonts.poppins(
                             fontSize: 12,
