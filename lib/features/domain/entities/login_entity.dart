@@ -1,13 +1,11 @@
 class LoginEntity {
-  final int id;
-  final String phone;
-  final String email;
-  final String username;
+  final bool status;
+  final String message;
+  final String? token;
 
- const LoginEntity({
-    required this.id,
-    required this.phone,
-    required this.email,
-    required this.username,
+  LoginEntity({
+    required this.status,
+    required this.message,
+    this.token,
   });
 }

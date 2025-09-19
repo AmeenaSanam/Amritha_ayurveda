@@ -5,18 +5,17 @@ import '../../../core/constant/app_colors.dart';
 class CustomTextFormField extends StatelessWidget {
   final TextEditingController controller;
   final String hintText;
-  final dynamic keyboardType;                              
+  final dynamic keyboardType;
   final FormFieldValidator<String>? validator;
   final void Function(String)? onChanged;
-  
- const CustomTextFormField({
+
+  const CustomTextFormField({
     super.key,
     required this.controller,
     required this.hintText,
     required this.keyboardType,
     this.validator,
     this.onChanged,
-  
   });
 
   @override
@@ -28,54 +27,33 @@ class CustomTextFormField extends StatelessWidget {
       onTapOutside: (event) {
         FocusScope.of(context).unfocus();
       },
-      style: const TextStyle(
-        color: AppColors.black,
-        fontSize: 13,
-      ),
+      style: const TextStyle(color: AppColors.black, fontSize: 13),
       decoration: InputDecoration(
-        contentPadding: const EdgeInsets.symmetric(
-          horizontal: 10,
-        ),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 10),
         filled: true,
-        fillColor: AppColors.lightGrey.withValues(alpha: 0.6),  
+        fillColor: AppColors.lightGrey.withValues(alpha: 0.2),
         border: OutlineInputBorder(
-            borderSide: BorderSide(
-          width: 2.0,
-          color: AppColors.lightGrey,
-        )),
+          borderSide: BorderSide(width: 2.0, color: AppColors.lightGrey),
+        ),
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(color: AppColors.lightGrey),
-          borderRadius: BorderRadius.all(
-            Radius.circular(5),
-          ),
+          borderRadius: BorderRadius.all(Radius.circular(5)),
         ),
         focusedBorder: const OutlineInputBorder(
           borderSide: BorderSide(color: AppColors.textBlack),
-          borderRadius: BorderRadius.all(
-            Radius.circular(5),
-          ),
+          borderRadius: BorderRadius.all(Radius.circular(5)),
         ),
         errorBorder: const OutlineInputBorder(
           borderSide: BorderSide(color: AppColors.red),
-          borderRadius: BorderRadius.all(
-            Radius.circular(5),
-          ),
+          borderRadius: BorderRadius.all(Radius.circular(5)),
         ),
         focusedErrorBorder: const OutlineInputBorder(
           borderSide: BorderSide(color: AppColors.red),
-          borderRadius: BorderRadius.all(
-            Radius.circular(5),
-          ),
+          borderRadius: BorderRadius.all(Radius.circular(5)),
         ),
-        labelStyle: const TextStyle(
-          color: AppColors.black,
-          fontSize: 13,
-        ),
+        labelStyle: const TextStyle(color: AppColors.black, fontSize: 13),
         hintText: hintText,
-        hintStyle: const TextStyle(
-          color: AppColors.textBlack,
-          fontSize: 13,
-        ),
+        hintStyle: const TextStyle(color: AppColors.lightGrey, fontSize: 13),
       ),
       validator: validator,
       onChanged: onChanged,
@@ -83,22 +61,20 @@ class CustomTextFormField extends StatelessWidget {
   }
 }
 
- 
- class CustomPasswordField extends StatefulWidget {
+class CustomPasswordField extends StatefulWidget {
   final TextEditingController controller;
   final String hintText;
-  final dynamic keyboardType;                              
+  final dynamic keyboardType;
   final FormFieldValidator<String>? validator;
   final void Function(String)? onChanged;
-  
- const CustomPasswordField({
+
+  const CustomPasswordField({
     super.key,
     required this.controller,
     required this.hintText,
     required this.keyboardType,
     this.validator,
     this.onChanged,
-  
   });
 
   @override
@@ -106,13 +82,14 @@ class CustomTextFormField extends StatelessWidget {
 }
 
 class _CustomPasswordFieldState extends State<CustomPasswordField> {
-  bool _obscureText=true;
+  bool _obscureText = true;
 
-  void toggle(){
+  void toggle() {
     setState(() {
-    _obscureText=!_obscureText;  
+      _obscureText = !_obscureText;
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(
@@ -122,58 +99,39 @@ class _CustomPasswordFieldState extends State<CustomPasswordField> {
       onTapOutside: (event) {
         FocusScope.of(context).unfocus();
       },
-      style: const TextStyle(
-        color: AppColors.black,
-        fontSize: 13,
-      ),
+      style: const TextStyle(color: AppColors.black, fontSize: 13),
       decoration: InputDecoration(
-        contentPadding: const EdgeInsets.symmetric(
-          horizontal: 10,
-        ),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 10),
         suffixIcon: GestureDetector(
           onTap: toggle,
-          child: _obscureText?Icon(Icons.visibility_outlined):Icon(Icons.visibility_off_outlined)
+          child: _obscureText
+              ? Icon(Icons.visibility_outlined, color: AppColors.textBlack)
+              : Icon(Icons.visibility_off_outlined, color: AppColors.textBlack),
         ),
         filled: true,
-        fillColor: AppColors.lightGrey.withValues(alpha: 0.6),  
+        fillColor: AppColors.lightGrey.withValues(alpha: 0.2),
         border: OutlineInputBorder(
-            borderSide: BorderSide(
-          width: 2.0,
-          color: AppColors.lightGrey,
-        )),
+          borderSide: BorderSide(width: 2.0, color: AppColors.lightGrey),
+        ),
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(color: AppColors.lightGrey),
-          borderRadius: BorderRadius.all(
-            Radius.circular(5),
-          ),
+          borderRadius: BorderRadius.all(Radius.circular(5)),
         ),
         focusedBorder: const OutlineInputBorder(
           borderSide: BorderSide(color: AppColors.textBlack),
-          borderRadius: BorderRadius.all(
-            Radius.circular(5),
-          ),
+          borderRadius: BorderRadius.all(Radius.circular(5)),
         ),
         errorBorder: const OutlineInputBorder(
           borderSide: BorderSide(color: AppColors.red),
-          borderRadius: BorderRadius.all(
-            Radius.circular(5),
-          ),
+          borderRadius: BorderRadius.all(Radius.circular(5)),
         ),
         focusedErrorBorder: const OutlineInputBorder(
           borderSide: BorderSide(color: AppColors.red),
-          borderRadius: BorderRadius.all(
-            Radius.circular(5),
-          ),
+          borderRadius: BorderRadius.all(Radius.circular(5)),
         ),
-        labelStyle: const TextStyle(
-          color: AppColors.black,
-          fontSize: 13,
-        ),
+        labelStyle: const TextStyle(color: AppColors.black, fontSize: 13),
         hintText: widget.hintText,
-        hintStyle: const TextStyle(
-          color: AppColors.textBlack,
-          fontSize: 13,
-        ),
+        hintStyle: const TextStyle(color: AppColors.lightGrey, fontSize: 13),
       ),
       validator: widget.validator,
       onChanged: widget.onChanged,

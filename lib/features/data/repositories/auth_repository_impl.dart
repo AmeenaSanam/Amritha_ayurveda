@@ -1,31 +1,24 @@
-import 'package:amritha_ayurveda/core/error/failures.dart';
-import 'package:amritha_ayurveda/core/utils/auth_storage.dart';
-import 'package:amritha_ayurveda/features/domain/entities/login_entity.dart';
-import 'package:amritha_ayurveda/features/domain/repositories/auth_repository.dart';
+import 'package:injectable/injectable.dart';
 
-import '../data_sources.dart/auth_remote_datasource.dart';
+import '../../domain/entities/login_entity.dart';
+import '../../domain/repositories/auth_repository.dart';
+import '../data_sources/remote/auth_remote_data_source.dart';
+import '../data_sources/local/auth_local_data_source.dart';
+import '../request_models/login_request_model.dart';
 
+@LazySingleton(as: AuthRepository)
+@injectable
 class AuthRepositoryImpl implements AuthRepository {
-  final AuthRemoteDatasource remoteDataSource;
-  final AuthStorage authStorage;
+  final AuthRemoteDataSource authRemoteDataSource;
+  final AuthLocalDataSource authLocalDataSource;
 
-  AuthRepositoryImpl(this.remoteDataSource, this.authStorage);
+  AuthRepositoryImpl(
+      {required this.authRemoteDataSource, required this.authLocalDataSource});
 
   @override
-  Future<(LoginEntity?, Failures?)> login(
-    String username,
-    String password,
-  ) async {
-    try {
-      final response = await remoteDataSource.login(username, password);
-      if (response.status && response.token != null) {
-        await authStorage.setAuthToken(response.token!);
-        return (response.loginEntity, null);
-      } else {
-        return (null, Failures(response.message));
-      }
-    } catch (e) {
-      return (null, Failures(e.toString()));
-    }
+  Future<LoginEntity> login(LoginRequestModel loginRequestModel) async {
+    final response = await authRemoteDataSource.login(loginRequestModel);
+    authLocalDataSource.saveToken(response.token!);
+    return response;
   }
 }

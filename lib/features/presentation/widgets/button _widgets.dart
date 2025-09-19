@@ -14,7 +14,7 @@ class CustomButton extends StatelessWidget {
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
         elevation: 1,
-        padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 70.0),
+        // padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 70.0),
         // fixedSize: Size.fromWidth(340),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0),
